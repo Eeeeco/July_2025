@@ -266,17 +266,19 @@
         }
 
         .home-content h1 {
-            font-size: 3rem; /* Adjusted font size */
-            font-weight: 800;
-            margin-bottom: 0.8rem; /* Adjusted margin */
+            font-size: 2rem; /* Further reduced font size for "Hi, I'm" */
+            font-weight: 700;
+            margin-bottom: 0.8rem;
         }
 
         .home-content h1 span {
             color: var(--primary-color);
+            font-size: 1.1em; /* Make "Saurav Ojha" slightly larger relative to h1 */
+            font-weight: 900; /* Make "Saurav Ojha" very bold */
         }
 
         .typing-text h3 {
-            font-size: 1.8rem; /* Adjusted font size */
+            font-size: 2rem; /* Further reduced font size for "And I'm a", matching h1 */
             font-weight: 600;
             margin-bottom: 1.2rem; /* Adjusted margin */
             min-height: 2.2rem; /* Ensure space for typing animation */
@@ -636,30 +638,22 @@
             align-items: flex-start;
             margin-bottom: 2.5rem; /* Adjusted margin */
             position: relative;
-        }
-
-        /* Adjusting for better layout and preventing overlap */
-        .timeline_item:nth-child(odd) {
-            flex-direction: row-reverse; /* Right side content for odd items */
-        }
-
-        .timeline_item:nth-child(even) {
-            flex-direction: row; /* Left side content for even items */
+            flex-direction: row; /* Ensure all items flow left-to-right */
         }
 
         .timeline_left,
         .timeline_right {
             flex: 1;
-            padding: 0 1.5rem; /* Adjusted padding */
+            padding: 0 1rem; /* Adjusted padding to bring content closer */
             box-sizing: border-box;
         }
 
         .timeline_left {
-            text-align: right;
+            text-align: right; /* Dates align right, closer to center line */
         }
 
         .timeline_right {
-            text-align: left;
+            text-align: left; /* Content aligns left, closer to center line */
         }
 
         .timeline_centre {
@@ -668,7 +662,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 0 0.8rem; /* Adjusted margin */
+            margin: 0; /* Removed margin to bring closer */
+            width: 60px; /* Fixed width for the center column to prevent content shift */
         }
 
         .timeline_circle {
@@ -690,8 +685,26 @@
             font-size: 1rem; /* Adjusted font size */
             font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 0.4rem; /* Adjusted margin */
+            white-space: nowrap; /* Prevent date from wrapping */
         }
+
+        /* Adjust date text position for left/right items on desktop */
+        @media (min-width: 769px) {
+            .timeline_item .timeline_left {
+                text-align: right; /* Dates align right, closer to center line */
+            }
+            .timeline_item .timeline_right {
+                text-align: left; /* Content aligns left, closer to center line */
+            }
+            .timeline_date-text {
+                position: absolute; /* Re-add absolute for desktop */
+                top: 50%;
+                transform: translateY(-50%);
+                right: calc(50% + 30px); /* Position to the right of the center line */
+                text-align: right; /* Align text right for left side */
+            }
+        }
+
 
         .timeline_right h3,
         .timeline_left h3 {
@@ -839,8 +852,10 @@
         }
 
         .contact-form .btn {
-            width: 100%;
-            margin-top: 0;
+            width: 200px; /* Reduced width */
+            margin: 0 auto; /* Center the button */
+            display: block; /* Make it a block element to apply margin auto */
+            margin-top: 1.2rem; /* Adjusted margin-top */
             text-align: center;
         }
 
@@ -917,10 +932,10 @@
                 margin-left: 3rem;
             }
             .home-content h1 {
-                font-size: 3.8rem; /* Larger font for desktop */
+                font-size: 2.2rem; /* Adjusted font size for desktop */
             }
             .typing-text h3 {
-                font-size: 2.2rem; /* Larger font for desktop */
+                font-size: 2.2rem; /* Adjusted font size for desktop, matching h1 */
             }
             .about-content {
                 flex-direction: row; /* Side-by-side layout for about section on desktop */
@@ -936,22 +951,6 @@
             .stats-container {
                 justify-content: flex-start; /* Align stats to the left */
                 flex-wrap: nowrap; /* Keep them in one line on desktop */
-            }
-            .timeline_item:nth-child(odd) .timeline_left {
-                order: 2; /* Content on right */
-                text-align: left;
-            }
-            .timeline_item:nth-child(odd) .timeline_right {
-                order: 1; /* Date on left */
-                text-align: right;
-            }
-             .timeline_item:nth-child(even) .timeline_left {
-                order: 1; /* Content on left */
-                text-align: right;
-            }
-            .timeline_item:nth-child(even) .timeline_right {
-                order: 2; /* Date on right */
-                text-align: left;
             }
             .timeline_component .timeline_progress {
                 left: 50%; /* Keep vertical line centered */
@@ -983,10 +982,13 @@
                 margin-top: 0.8rem; /* Adjusted margin */
             }
             .home-content h1 {
-                font-size: 2.5rem; /* Adjusted font size */
+                font-size: 1.8rem; /* Adjusted font size for mobile */
+            }
+            .home-content h1 span {
+                font-size: 1.1em; /* Maintain relative size */
             }
             .typing-text h3 {
-                font-size: 1.4rem; /* Adjusted font size */
+                font-size: 1.8rem; /* Match h1 font size for mobile */
             }
             .section-title {
                 font-size: 1.8rem; /* Adjusted font size */
@@ -1004,6 +1006,7 @@
             }
             .timeline_centre {
                 margin: 0.8rem 0; /* Adjusted margin */
+                width: auto; /* Allow width to be auto on mobile */
             }
             .timeline_progress {
                 left: 50%; /* Keep vertical line centered */
@@ -1026,14 +1029,29 @@
                 flex-basis: calc(33.33% - 1rem); /* Distribute space for 3 items with gap */
                 max-width: 150px; /* Maintain max width to prevent excessive growth */
             }
+
+            /* Mobile specific timeline adjustments */
+            .timeline_date-text {
+                position: static; /* Revert to static position on mobile */
+                transform: none;
+                margin-bottom: 0.5rem; /* Add some space below date */
+            }
+            .timeline_item:nth-child(odd) .timeline_date-text,
+            .timeline_item:nth-child(even) .timeline_date-text {
+                left: auto;
+                right: auto;
+            }
         }
 
         @media (max-width: 480px) {
             .home-content h1 {
-                font-size: 2rem; /* Adjusted font size */
+                font-size: 1.6rem; /* Further reduced font size */
+            }
+            .home-content h1 span {
+                font-size: 1.1em; /* Maintain relative size */
             }
             .typing-text h3 {
-                font-size: 1.2rem; /* Adjusted font size */
+                font-size: 1.6rem; /* Match h1 font size for mobile */
             }
             .section-title {
                 font-size: 1.6rem; /* Adjusted font size */
@@ -1075,7 +1093,7 @@
 
     <header>
         <a href="#home" class="fixed-name">Saurav Ojha</a>
-        <nav>
+        <nav role="navigation">
             <a href="#home" class="active">Home</a>
             <a href="#about">About</a>
             <a href="#projects">Projects</a>
@@ -1084,389 +1102,391 @@
             <a href="#experience">Experience</a>
             <a href="#contact">Contact</a>
         </nav>
-        <label id="theme-toggle" class="theme-toggle">
+        <label id="theme-toggle" class="theme-toggle" aria-label="Toggle dark and light mode">
             <input type="checkbox" id="theme-checkbox">
             <span class="slider"></span>
         </label>
     </header>
 
-    <section id="home" class="home">
-        <div class="home-content">
-            <h1>Hi, I'm <span>Saurav Ojha</span></h1>
-            <div class="typing-text">
-                <h3>And I'm a <span></span></h3>
+    <main>
+        <section id="home" class="home">
+            <div class="home-content">
+                <h1>Hi, I'm <span>Saurav Ojha</span></h1>
+                <div class="typing-text">
+                    <h3>And I'm a <span></span></h3>
+                </div>
+                <p>A passionate data analyst with expertise in Python, Power BI, SQL, and Machine Learning. I love turning data into actionable insights.</p>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/sauravojha/" target="_blank" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                    <a href="#" target="_blank" aria-label="Twitter Profile"><i class="fab fa-twitter"></i></a>
+                </div>
+                <a href="#" class="btn" aria-label="Download CV">Download CV</a>
             </div>
-            <p>A passionate data analyst with expertise in Python, Power BI, SQL, and Machine Learning. I love turning data into actionable insights.</p>
-            <div class="social-icons">
-                <a href="https://www.linkedin.com/in/sauravojha/" target="_blank" data-href="https://www.linkedin.com/in/sauravojha/"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/yourusername" target="_blank" data-href="https://github.com/yourusername"><i class="fab fa-github"></i></a>
-                <a href="#" target="_blank" data-href="#"><i class="fab fa-twitter"></i></a>
+            <div class="home-img">
+                <img src="https://raw.githubusercontent.com/Eeeeco/Portfolio/main/Mee.png" alt="Profile Picture of Saurav Ojha">
             </div>
-            <a href="#" class="btn">Download CV</a>
-        </div>
-        <div class="home-img">
-            <img src="https://raw.githubusercontent.com/Eeeeco/Portfolio/main/Mee.png" alt="Profile Picture">
-        </div>
-    </section>
+        </section>
 
-    <!-- New About Me Section -->
-    <section id="about" class="about">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-content">
-            <div class="about-img">
-                <img src="https://raw.githubusercontent.com/Eeeeco/Portfolio/main/Mee.png" alt="Saurav Ojha Profile Picture">
-            </div>
-            <div class="about-text">
-                <h3>Saurav Ojha</h3>
-                <p>As a dedicated Data Analyst with a strong foundation in Commerce and a pursuing MBA in Business Analytics, I excel at transforming complex datasets into clear, actionable insights. My expertise spans Python, Power BI, SQL, and Machine Learning, allowing me to uncover trends and drive informed decision-making. With a keen eye for detail and a passion for problem-solving, I am committed to leveraging data to optimize processes and contribute to impactful business outcomes.</p>
-                <div class="stats-container">
-                    <div class="stat-card">
-                        <div class="number" data-target="5">0</div>
-                        <div class="label">Projects</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="number" data-target="4" data-suffix="+">0</div>
-                        <div class="label">Years of Experience</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="number" data-target="6.82" data-decimal="2" data-suffix="+">0.00</div>
-                        <div class="label">Aggregate CGPA</div>
-                    </div>
+        <!-- New About Me Section -->
+        <section id="about" class="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="https://raw.githubusercontent.com/Eeeeco/Portfolio/main/Mee.png" alt="Saurav Ojha Profile Picture">
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="projects">
-        <h2 class="section-title">My Projects</h2>
-        <div class="projects-container">
-            <div class="project-card">
-                <div class="project-icon heart"><i class="fas fa-heartbeat"></i></div>
-                <h3>Heart Disease Prediction</h3>
-                <p>Analyzed patient data to identify trends and improve healthcare outcomes using machine learning models.</p>
-                <a href="https://github.com/yourusername" target="_blank" class="project-link">View Project</a>
-            </div>
-            <div class="project-card">
-                <div class="project-icon insurance"><i class="fas fa-file-invoice-dollar"></i></div>
-                <h3>Insurance Claims Prediction</h3>
-                <p>Developed a predictive model to assess insurance claim likelihood and optimize risk management.</p>
-                <a href="https://github.com/yourusername" target="_blank" class="project-link">View Project</a>
-            </div>
-            <div class="project-card">
-                <div class="project-icon bike"><i class="fas fa-biking"></i></div>
-                <h3>Bike Rental Analysis</h3>
-                <p>Performed in-depth analysis of bike rental patterns to optimize inventory and pricing strategies.</p>
-                <a href="https://github.com/yourusername" target="_blank" class="project-link">View Project</a>
-            </div>
-            <div class="project-card">
-                <div class="project-icon house"><i class="fas fa-city"></i></div>
-                <h3>House Price Prediction</h3>
-                <p>Built a robust machine learning model to accurately predict house prices based on diverse features.</p>
-                <a href="https://github.com/yourusername" target="_blank" class="project-link">View Project</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="skills">
-        <h2 class="section-title">My Skills</h2>
-        <div class="skills-container">
-            <div class="skill-card" data-progress="90">
-                <div class="skill-header">
-                    <div class="skill-icon python"><i class="fab fa-python"></i></div>
-                    <h3>Python</h3>
-                </div>
-                <div class="skill-progress">
-                    <div class="progress-bar">
-                        <span class="progress-value">90%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="skill-card" data-progress="80">
-                <div class="skill-header">
-                    <div class="skill-icon powerbi"><i class="fas fa-chart-bar"></i></div>
-                    <h3>Power BI</h3>
-                </div>
-                <div class="skill-progress">
-                    <div class="progress-bar">
-                        <span class="progress-value">80%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="skill-card" data-progress="90">
-                <div class="skill-header">
-                    <div class="skill-icon sql"><i class="fas fa-database"></i></div>
-                    <h3>SQL</h3>
-                </div>
-                <div class="skill-progress">
-                    <div class="progress-bar">
-                        <span class="progress-value">90%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="skill-card" data-progress="80">
-                <div class="skill-header">
-                    <div class="skill-icon ml"><i class="fas fa-brain"></i></div>
-                    <h3>Machine Learning</h3>
-                </div>
-                <div class="skill-progress">
-                    <div class="progress-bar">
-                        <span class="progress-value">80%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="skill-card" data-progress="80">
-                <div class="skill-header">
-                    <div class="skill-icon us-healthcare"><i class="fas fa-hospital"></i></div>
-                    <h3>US Healthcare</h3>
-                </div>
-                <div class="skill-progress">
-                    <div class="progress-bar">
-                        <span class="progress-value">80%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="skill-card" data-progress="60">
-                <div class="skill-header">
-                    <div class="skill-icon graphic-design"><i class="fas fa-paint-brush"></i></div>
-                    <h3>Graphic Design</h3>
-                </div>
-                <div class="skill-progress">
-                    <div class="progress-bar">
-                        <span class="progress-value">60%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="skill-card" data-progress="90">
-                <div class="skill-header">
-                    <div class="skill-icon ms-excel"><i class="fas fa-file-excel"></i></div>
-                    <h3>MS Excel</h3>
-                </div>
-                <div class="skill-progress">
-                    <div class="progress-bar">
-                        <span class="progress-value">90%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="skill-card" data-progress="40">
-                <div class="skill-header">
-                    <div class="skill-icon html-css"><i class="fas fa-code"></i></div>
-                    <h3>HTML & CSS</h3>
-                </div>
-                <div class="skill-progress">
-                    <div class="progress-bar">
-                        <span class="progress-value">40%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="skill-card" data-progress="85">
-                <div class="skill-header">
-                    <div class="skill-icon ds"><i class="fas fa-chart-pie"></i></div>
-                    <h3>Data Science</h3>
-                </div>
-                <div class="skill-progress">
-                    <div class="progress-bar">
-                        <span class="progress-value">85%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="education" class="section-timeline">
-        <h2 class="section-title">My Education</h2>
-        <div class="timeline_component">
-            <div class="timeline_progress">
-                <div class="timeline_progress-bar"></div>
-            </div>
-            <div class="timeline_item">
-                <div class="timeline_left">
-                    <div class="timeline_date-text">2025 - present</div>
-                </div>
-                <div class="timeline_centre">
-                    <div class="timeline_circle"><i class="fas fa-graduation-cap"></i></div>
-                </div>
-                <div class="timeline_right">
-                    <div class="margin-bottom-xlarge">
-                        <h3>MBA in Business Analytics</h3>
-                        <h4>UPES University</h4>
-                        <div class="timeline_text">Specialized in Business Analytics, Data Science & Machine Learning. Completed coursework in Financial management, database management, and AI.</div>
-                    </div>
-                    <div class="timeline_image-wrapper">
-                        <img src="https://research.upes.ac.in/wp-content/uploads/2022/06/Logo-Icon.jpg" loading="lazy" alt="UPES University Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=UPES';"/>
-                    </div>
-                </div>
-            </div>
-            <div class="timeline_item">
-                <div class="timeline_left">
-                    <div class="timeline_date-text">2019 - 2023</div>
-                </div>
-                <div class="timeline_centre">
-                    <div class="timeline_circle"><i class="fas fa-school"></i></div>
-                </div>
-                <div class="timeline_right">
-                    <div class="margin-bottom-xlarge">
-                        <h3>Bachelor of Commerce</h3>
-                        <h4>IGNOU University</h4>
-                        <div class="timeline_text">Majored in accounting with a focus on Business laws & Management.</div>
-                    </div>
-                    <div class="timeline_image-wrapper">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPvWJVb-OsmPrJ6KxqLTtlFOcBC2kzt8QKmw&s" loading="lazy" alt="IGNOU University Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=IGNOU';"/>
-                    </div>
-                </div>
-            </div>
-            <div class="timeline_item">
-                <div class="timeline_left">
-                    <div class="timeline_date-text">2017 - 2019</div>
-                </div>
-                <div class="timeline_centre">
-                    <div class="timeline_circle"><i class="fas fa-school"></i></div>
-                </div>
-                <div class="timeline_right">
-                    <div class="margin-bottom-xlarge">
-                        <h3>Senior Secondary</h3>
-                        <h4>Bhagirath Public School</h4>
-                        <div class="timeline_text">Completed Senior Secondary education with a focus on Commerce and Economics.</div>
-                    </div>
-                    <div class="timeline_image-wrapper">
-                        <img src="https://gcdnb.pbrd.co/images/chFFhIeLENkp.png?o=1" loading="lazy" alt="Bhagirath Public School Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=School';"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience" class="experience">
-        <h2 class="section-title">My Experience</h2>
-        <div class="timeline_component">
-            <div class="timeline_progress">
-                <div class="timeline_progress-bar"></div>
-            </div>
-            <!-- New Experience Item: Rubixe AI -->
-            <div class="timeline_item">
-                <div class="timeline_left">
-                    <div class="timeline_date-text">2024 - 2025</div>
-                </div>
-                <div class="timeline_centre">
-                    <div class="timeline_circle"><i class="fas fa-flask"></i></div> <!-- Using a flask icon for science/data -->
-                </div>
-                <div class="timeline_right">
-                    <div class="margin-bottom-xlarge">
-                        <h3>Data Scientist Consultant (Internship)</h3>
-                        <h4>Rubixe AI</h4>
-                        <div class="timeline_text">Gained practical experience in data science, working on real-world projects and applying machine learning techniques to solve business problems.</div>
-                    </div>
-                    <div class="timeline_image-wrapper">
-                        <img src="https://placehold.co/100x100/3a3a5a/e0e0e0?text=Rubixe+AI" loading="lazy" alt="Rubixe AI Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=Rubixe+AI';"/>
-                    </div>
-                </div>
-            </div>
-            <div class="timeline_item">
-                <div class="timeline_left">
-                    <div class="timeline_date-text">2023 - Present</div>
-                </div>
-                <div class="timeline_centre">
-                    <div class="timeline_circle"><i class="fas fa-briefcase"></i></div>
-                </div>
-                <div class="timeline_right">
-                    <div class="margin-bottom-xlarge">
-                        <h3>Senior Executive</h3>
-                        <h4>Pacific Global</h4>
-                        <div class="timeline_text">Leveraged analytical skills to interpret complex data, identify trends, and provide actionable insights within the healthcare revenue cycle.</div>
-                    </div>
-                    <div class="timeline_image-wrapper">
-                        <img src="https://media.licdn.com/dms/image/v2/C4D0BAQEJOUmWnXgvuw/company-logo_200_200/company-logo_200_200/0/1630491550245/pacificbpo_logo?e=2147483647&v=beta&t=gDVvxLm7_8UBoREweyYcVkY7R1reg5Z1r1Jj00PSTPE" loading="lazy" alt="Pacific Global Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=Pacific';"/>
-                    </div>
-                </div>
-            </div>
-            <div class="timeline_item">
-                <div class="timeline_left">
-                    <div class="timeline_date-text">2021 - 2023</div>
-                </div>
-                <div class="timeline_centre">
-                    <div class="timeline_circle"><i class="fas fa-briefcase"></i></div>
-                </div>
-                <div class="timeline_right">
-                    <div class="margin-bottom-xlarge">
-                        <h3>Analyst 2</h3>
-                        <h4>R1RCM</h4>
-                        <div class="timeline_text">Performed advanced data analysis and predictive modeling for healthcare claims.</div>
-                    </div>
-                    <div class="timeline_image-wrapper">
-                        <img src="https://www.naukri.com/hotjobs/images/v3/R1RCM_Dec23.gif" loading="lazy" alt="R1RCM Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=R1RCM';"/>
-                    </div>
-                </div>
-            </div>
-            <div class="timeline_item">
-                <div class="timeline_left">
-                    <div class="timeline_date-text">2020 - 2021</div>
-                </div>
-                <div class="timeline_centre">
-                    <div class="timeline_circle"><i class="fas fa-briefcase"></i></div>
-                </div>
-                <div class="timeline_right">
-                    <div class="margin-bottom-xlarge">
-                        <h3>Associate</h3>
-                        <h4>Tech Mahindra</h4>
-                        <div class="timeline_text">Handled data processing, reporting, and analysis tasks to support client decision-making.</div>
-                    </div>
-                    <div class="timeline_image-wrapper">
-                        <img src="https://pbs.twimg.com/profile_images/1808469148504358912/0aA17dCE_400x400.jpg" loading="lazy" alt="Tech Mahindra Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=Tech+M';"/>
-                    </div>
-                </div>
-            </div>
-            <div class="timeline_item">
-                <div class="timeline_left">
-                    <div class="timeline_date-text">2019 - 2020</div>
-                </div>
-                <div class="timeline_centre">
-                    <div class="timeline_circle"><i class="fas fa-headset"></i></div>
-                </div>
-                <div class="timeline_right">
-                    <div class="margin-bottom-xlarge">
-                        <h3>Customer Service Executive</h3>
-                        <h4>iEnergizer</h4>
-                        <div class="timeline_text">Provided customer support, resolved queries, and maintained high service standards in a fast-paced environment.</div>
-                    </div>
-                    <div class="timeline_image-wrapper">
-                        <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFC9G8s1cmqXg/company-logo_200_200/company-logo_200_200/0/1685106243007/ienergizer_logo?e=2147483647&v=beta&t=fWW2FnpCHgaouGdBqDXUTHh3wT630GoESzOm9O7lOFk" loading="lazy" alt="iEnergizer Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=iEnergizer';"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <h2 class="section-title">Contact Me</h2>
-        <div class="contact-container">
-            <div class="contact-content">
-                <div class="contact-form">
-                    <h3>Send Me a Message</h3>
-                    <form action="#" method="post">
-                        <div class="form-row">
-                            <input type="text" name="name" placeholder="Your Name" required>
-                            <input type="email" name="email" placeholder="Your Email" required>
+                <div class="about-text">
+                    <h3>Saurav Ojha</h3>
+                    <p>As a dedicated Data Analyst with a strong foundation in Commerce and a pursuing MBA in Business Analytics, I excel at transforming complex datasets into clear, actionable insights. My expertise spans Python, Power BI, SQL, and Machine Learning, allowing me to uncover trends and drive informed decision-making. With a keen eye for detail and a passion for problem-solving, I am committed to leveraging data to optimize processes and contribute to impactful business outcomes.</p>
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="number" data-target="5">0</div>
+                            <div class="label">Projects</div>
                         </div>
-                        <textarea name="message" placeholder="Your Message" required></textarea>
-                        <button type="submit" class="btn">Send Message</button>
-                    </form>
-                </div>
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <p><i class="fas fa-envelope"></i> sauravojha124@gmail.com</p>
-                    <p><i class="fas fa-phone"></i> +1 123 456 7890</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Noida, India</p>
-                </div>
-                <div class="social-links-container">
-                    <h2>Social Links</h2>
-                    <div class="social-icons">
-                        <a href="https://www.linkedin.com/in/sauravojha/" target="_blank" data-href="https://www.linkedin.com/in/sauravojha/"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/yourusername" target="_blank" data-href="https://github.com/yourusername"><i class="fab fa-github"></i></a>
-                        <a href="#" target="_blank" data-href="#"><i class="fab fa-twitter"></i></a>
+                        <div class="stat-card">
+                            <div class="number" data-target="4" data-suffix="+">0</div>
+                            <div class="label">Years of Experience</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="number" data-target="6.82" data-decimal="2" data-suffix="+">0.00</div>
+                            <div class="label">Aggregate CGPA</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section id="projects" class="projects">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <div class="project-icon heart"><i class="fas fa-heartbeat"></i></div>
+                    <h3>Heart Disease Prediction</h3>
+                    <p>Analyzed patient data to identify trends and improve healthcare outcomes using machine learning models.</p>
+                    <a href="https://github.com/yourusername" target="_blank" class="project-link" aria-label="View Heart Disease Prediction Project">View Project</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon insurance"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <h3>Insurance Claims Prediction</h3>
+                    <p>Developed a predictive model to assess insurance claim likelihood and optimize risk management.</p>
+                    <a href="https://github.com/yourusername" target="_blank" class="project-link" aria-label="View Insurance Claims Prediction Project">View Project</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon bike"><i class="fas fa-biking"></i></div>
+                    <h3>Bike Rental Analysis</h3>
+                    <p>Performed in-depth analysis of bike rental patterns to optimize inventory and pricing strategies.</p>
+                    <a href="https://github.com/yourusername" target="_blank" class="project-link" aria-label="View Bike Rental Analysis Project">View Project</a>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon house"><i class="fas fa-city"></i></div>
+                    <h3>House Price Prediction</h3>
+                    <p>Built a robust machine learning model to accurately predict house prices based on diverse features.</p>
+                    <a href="https://github.com/yourusername" target="_blank" class="project-link" aria-label="View House Price Prediction Project">View Project</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="skills">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-container">
+                <div class="skill-card" data-progress="90">
+                    <div class="skill-header">
+                        <div class="skill-icon python"><i class="fab fa-python"></i></div>
+                        <h3>Python</h3>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <span class="progress-value">90%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card" data-progress="80">
+                    <div class="skill-header">
+                        <div class="skill-icon powerbi"><i class="fas fa-chart-bar"></i></div>
+                        <h3>Power BI</h3>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <span class="progress-value">80%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card" data-progress="90">
+                    <div class="skill-header">
+                        <div class="skill-icon sql"><i class="fas fa-database"></i></div>
+                        <h3>SQL</h3>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <span class="progress-value">90%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card" data-progress="80">
+                    <div class="skill-header">
+                        <div class="skill-icon ml"><i class="fas fa-brain"></i></div>
+                        <h3>Machine Learning</h3>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <span class="progress-value">80%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card" data-progress="80">
+                    <div class="skill-header">
+                        <div class="skill-icon us-healthcare"><i class="fas fa-hospital"></i></div>
+                        <h3>US Healthcare</h3>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <span class="progress-value">80%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card" data-progress="60">
+                    <div class="skill-header">
+                        <div class="skill-icon graphic-design"><i class="fas fa-paint-brush"></i></div>
+                        <h3>Graphic Design</h3>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <span class="progress-value">60%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card" data-progress="90">
+                    <div class="skill-header">
+                        <div class="skill-icon ms-excel"><i class="fas fa-file-excel"></i></div>
+                        <h3>MS Excel</h3>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <span class="progress-value">90%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card" data-progress="40">
+                    <div class="skill-header">
+                        <div class="skill-icon html-css"><i class="fas fa-code"></i></div>
+                        <h3>HTML & CSS</h3>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <span class="progress-value">40%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card" data-progress="85">
+                    <div class="skill-header">
+                        <div class="skill-icon ds"><i class="fas fa-chart-pie"></i></div>
+                        <h3>Data Science</h3>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <span class="progress-value">85%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="section-timeline">
+            <h2 class="section-title">My Education</h2>
+            <div class="timeline_component">
+                <div class="timeline_progress">
+                    <div class="timeline_progress-bar"></div>
+                </div>
+                <div class="timeline_item">
+                    <div class="timeline_left">
+                        <div class="timeline_date-text">2025 - present</div>
+                    </div>
+                    <div class="timeline_centre">
+                        <div class="timeline_circle"><i class="fas fa-graduation-cap"></i></div>
+                    </div>
+                    <div class="timeline_right">
+                        <div class="margin-bottom-xlarge">
+                            <h3>MBA in Business Analytics</h3>
+                            <h4>UPES University</h4>
+                            <div class="timeline_text">Specialized in Business Analytics, Data Science & Machine Learning. Completed coursework in Financial management, database management, and AI.</div>
+                        </div>
+                        <div class="timeline_image-wrapper">
+                            <img src="https://research.upes.ac.in/wp-content/uploads/2022/06/Logo-Icon.jpg" loading="lazy" alt="UPES University Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=UPES';"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline_item">
+                    <div class="timeline_left">
+                        <div class="timeline_date-text">2019 - 2023</div>
+                    </div>
+                    <div class="timeline_centre">
+                        <div class="timeline_circle"><i class="fas fa-school"></i></div>
+                    </div>
+                    <div class="timeline_right">
+                        <div class="margin-bottom-xlarge">
+                            <h3>Bachelor of Commerce</h3>
+                            <h4>IGNOU University</h4>
+                            <div class="timeline_text">Majored in accounting with a focus on Business laws & Management.</div>
+                        </div>
+                        <div class="timeline_image-wrapper">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPvWJVb-OsmPrJ6KxqLTtlFOcBC2kzt8QKmw&s" loading="lazy" alt="IGNOU University Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=IGNOU';"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline_item">
+                    <div class="timeline_left">
+                        <div class="timeline_date-text">2017 - 2019</div>
+                    </div>
+                    <div class="timeline_centre">
+                        <div class="timeline_circle"><i class="fas fa-school"></i></div>
+                    </div>
+                    <div class="timeline_right">
+                        <div class="margin-bottom-xlarge">
+                            <h3>Senior Secondary</h3>
+                            <h4>Bhagirath Public School</h4>
+                            <div class="timeline_text">Completed Senior Secondary education with a focus on Commerce and Economics.</div>
+                        </div>
+                        <div class="timeline_image-wrapper">
+                            <img src="https://gcdnb.pbrd.co/images/chFFhIeLENkp.png?o=1" loading="lazy" alt="Bhagirath Public School Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=School';"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="experience">
+            <h2 class="section-title">My Experience</h2>
+            <div class="timeline_component">
+                <div class="timeline_progress">
+                    <div class="timeline_progress-bar"></div>
+                </div>
+                <!-- New Experience Item: Rubixe AI -->
+                <div class="timeline_item">
+                    <div class="timeline_left">
+                        <div class="timeline_date-text">2024 - 2025</div>
+                    </div>
+                    <div class="timeline_centre">
+                        <div class="timeline_circle"><i class="fas fa-flask"></i></div> <!-- Using a flask icon for science/data -->
+                    </div>
+                    <div class="timeline_right">
+                        <div class="margin-bottom-xlarge">
+                            <h3>Data Scientist Consultant (Internship)</h3>
+                            <h4>Rubixe AI</h4>
+                            <div class="timeline_text">Gained practical experience in data science, working on real-world projects and applying machine learning techniques to solve business problems.</div>
+                        </div>
+                        <div class="timeline_image-wrapper">
+                            <img src="https://placehold.co/100x100/3a3a5a/e0e0e0?text=Rubixe+AI" loading="lazy" alt="Rubixe AI Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=Rubixe+AI';"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline_item">
+                    <div class="timeline_left">
+                        <div class="timeline_date-text">2023 - Present</div>
+                    </div>
+                    <div class="timeline_centre">
+                        <div class="timeline_circle"><i class="fas fa-briefcase"></i></div>
+                    </div>
+                    <div class="timeline_right">
+                        <div class="margin-bottom-xlarge">
+                            <h3>Senior Executive</h3>
+                            <h4>Pacific Global</h4>
+                            <div class="timeline_text">Leveraged analytical skills to interpret complex data, identify trends, and provide actionable insights within the healthcare revenue cycle.</div>
+                        </div>
+                        <div class="timeline_image-wrapper">
+                            <img src="https://media.licdn.com/dms/image/v2/C4D0BAQEJOUmWnXgvuw/company-logo_200_200/company-logo_200_200/0/1630491550245/pacificbpo_logo?e=2147483647&v=beta&t=gDVvxLm7_8UBoREweyYcVkY7R1reg5Z1r1Jj00PSTPE" loading="lazy" alt="Pacific Global Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=Pacific';"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline_item">
+                    <div class="timeline_left">
+                        <div class="timeline_date-text">2021 - 2023</div>
+                    </div>
+                    <div class="timeline_centre">
+                        <div class="timeline_circle"><i class="fas fa-briefcase"></i></div>
+                    </div>
+                    <div class="timeline_right">
+                        <div class="margin-bottom-xlarge">
+                            <h3>Analyst 2</h3>
+                            <h4>R1RCM</h4>
+                            <div class="timeline_text">Performed advanced data analysis and predictive modeling for healthcare claims.</div>
+                        </div>
+                        <div class="timeline_image-wrapper">
+                            <img src="https://www.naukri.com/hotjobs/images/v3/R1RCM_Dec23.gif" loading="lazy" alt="R1RCM Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=R1RCM';"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline_item">
+                    <div class="timeline_left">
+                        <div class="timeline_date-text">2020 - 2021</div>
+                    </div>
+                    <div class="timeline_centre">
+                        <div class="timeline_circle"><i class="fas fa-briefcase"></i></div>
+                    </div>
+                    <div class="timeline_right">
+                        <div class="margin-bottom-xlarge">
+                            <h3>Associate</h3>
+                            <h4>Tech Mahindra</h4>
+                            <div class="timeline_text">Handled data processing, reporting, and analysis tasks to support client decision-making.</div>
+                        </div>
+                        <div class="timeline_image-wrapper">
+                            <img src="https://pbs.twimg.com/profile_images/1808469148504358912/0aA17dCE_400x400.jpg" loading="lazy" alt="Tech Mahindra Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=Tech+M';"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline_item">
+                    <div class="timeline_left">
+                        <div class="timeline_date-text">2019 - 2020</div>
+                    </div>
+                    <div class="timeline_centre">
+                        <div class="timeline_circle"><i class="fas fa-headset"></i></div>
+                    </div>
+                    <div class="timeline_right">
+                        <div class="margin-bottom-xlarge">
+                            <h3>Customer Service Executive</h3>
+                            <h4>iEnergizer</h4>
+                            <div class="timeline_text">Provided customer support, resolved queries, and maintained high service standards in a fast-paced environment.</div>
+                        </div>
+                        <div class="timeline_image-wrapper">
+                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQFC9G8s1cmqXg/company-logo_200_200/company-logo_200_200/0/1685106243007/ienergizer_logo?e=2147483647&v=beta&t=fWW2FnpCHgaouGdBqDXUTHh3wT630GoESzOm9O7lOFk" loading="lazy" alt="iEnergizer Logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3a3a5a/e0e0e0?text=iEnergizer';"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-container">
+                <div class="contact-content">
+                    <div class="contact-form">
+                        <h3>Send Me a Message</h3>
+                        <form action="#" method="post" id="contactForm">
+                            <div class="form-row">
+                                <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
+                                <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
+                            </div>
+                            <textarea name="message" placeholder="Your Message" required aria-label="Your Message"></textarea>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        <p><i class="fas fa-envelope"></i> sauravojha124@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> +1 123 456 7890</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Noida, India</p>
+                    </div>
+                    <div class="social-links-container">
+                        <h2>Social Links</h2>
+                        <div class="social-icons">
+                            <a href="https://www.linkedin.com/in/sauravojha/" target="_blank" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                            <a href="#" target="_blank" aria-label="Twitter Profile"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer id="footer">
         <div class="footer-container">
@@ -1475,6 +1495,16 @@
     </footer>
 
     <script>
+        // Debounce function for performance optimization
+        function debounce(func, delay) {
+            let timeout;
+            return function(...args) {
+                const context = this;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), delay);
+            };
+        }
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1490,7 +1520,7 @@
         });
 
         // Highlight active nav link on scroll
-        window.addEventListener('scroll', () => {
+        window.addEventListener('scroll', debounce(() => {
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('nav a');
 
@@ -1506,7 +1536,7 @@
                     });
                 }
             });
-        });
+        }, 100)); // Debounce scroll event
 
         // Typing effect for the home section
         const typingTextElement = document.querySelector('.typing-text h3 span');
@@ -1636,6 +1666,24 @@
                 document.body.classList.remove('light-mode');
                 themeCheckbox.checked = false;
             }
+
+            // Handle contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevent default form submission
+                    // In a real application, you would send this data to a server
+                    // For now, we'll just log it and provide a simple message
+                    console.log('Form submitted!');
+                    console.log('Name:', this.name.value);
+                    console.log('Email:', this.email.value);
+                    console.log('Message:', this.message.value);
+
+                    // You could add a more sophisticated message box here
+                    alert('Thank you for your message! I will get back to you soon.');
+                    this.reset(); // Clear the form
+                });
+            }
         });
 
 
@@ -1655,10 +1703,10 @@
         });
 
         // Add scroll event listener to trigger animations
-        window.addEventListener('scroll', () => {
+        window.addEventListener('scroll', debounce(() => {
             animateSkillBars();
             animateTimeline();
-        });
+        }, 100)); // Debounce scroll event
 
     </script>
 </body>
